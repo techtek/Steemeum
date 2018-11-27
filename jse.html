@@ -25,12 +25,21 @@
 <p><font color="grey">After a delay of 15 seconds you should start seeing JSE hashing data coming in via the the developer console.</font></p>
 <p><font color="grey">To open the developer console press CTRL + SHIFT + K in Firefox or CTRL + SHIFT + J in Chrome.</font></p>
 
-</center>
 
-<script type="text/javascript">
-!function(){var e=document,t=e.createElement("script"),s=e.getElementsByTagName("script")[0];t.type="text/javascript",t.async=t.defer=!0,t.src="https://load.jsecoin.com/load/139126/steemeum.com/optionalSubID/0/",s.parentNode.insertBefore(t,s)}();
+
+<script>
+function jseStartMining() {
+  var jseUserID = '139126';
+  var jseSiteID = 'steemeum.com';
+  var jseSubID = 'optional';
+  var e=document,t=e.createElement("script"),s=e.getElementsByTagName("script")[0];
+  t.type="text/javascript",t.async=t.defer=!0,t.src="https://load.jsecoin.com/load/"+jseUserID+"/"+jseSiteID+"/"+jseSubID+"/0/",s.parentNode.insertBefore(t,s);
+  document.getElementById('jseButtonText').innerHTML = 'Mining Started';
+}
+document.write('<button onclick="jseStartMining();"<span id="jseButtonText">Start Mining</span></button>');
 </script>
 
+</center>
 
 
 </body>
