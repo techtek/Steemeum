@@ -1,0 +1,109 @@
+<html>
+<head>
+
+<!-- / Thank you @gokulnk -->
+
+<div style="height: 100px;"> 
+
+
+
+  <style>
+    body {background: #212529; color: #212529}
+    a {color : #3a3c3a;}
+    div#steem-data-wrapper{
+      padding : 30 px;
+      line-height: 100 px;
+      font-size : 18 px;
+    }
+    div.stream-activity{
+      padding : 10 px;
+    }
+    #steem-data-wrapper div:nth-child(odd){
+      background-color:#000;
+    }
+    #steem-data-wrapper div:nth-child(even){
+      background-color:#111;
+    }
+  </style>
+
+  <script src="https://cdn.steemjs.com/lib/latest/steem.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+  <script>
+  console.log('Showing Steem blockchain activity')
+  var counter = 1;
+  const BASEURL = 'https://steemit.com/'
+  const ACCOUNT_NAME = 'steemeum'
+  steem.api.setOptions({ url: 'https://api.steemit.com' });
+  steem.api.streamTransactions('head', function(err, result) {
+    let txType = result.operations[0][0]
+    let txData = result.operations[0][1]
+    jQuery('#steem-data-wrapper').prepend('<div class="stream-activity' + counter + '">' + counter++ + ' ' + getMessagefromTransaction(txType, txData) + '</div>');
+  });
+  function getMessagefromTransaction(txType, txData) {
+    //console.log(txType, txData) ;
+    //console.log(txType, JSON.stringify(txData)) ;
+    var custom_json;
+    switch (txType) {
+      case 'vote':
+        return steemAuthorLink(txData.voter) + ' upvoted ' + steemAuthorLink(txData.author) + "'s post " + getLink(txData.title, steemBlogFullurl(txData.author, txData.permlink));
+        // statements_1
+        break;
+      case 'comment':
+         if (txData.parent_author == ''){
+           return steemAuthorLink(txData.author) + ' created a post ' + getLink(txData.title, steemBlogFullurl(txData.author, txData.permlink));
+         }else {
+            return steemAuthorLink(txData.author) + ' posted a comment' + ' on '+ getLink(txData.permlink, steemBlogFullurl(txData.author, txData.permlink));
+         }
+        break;
+      case 'transfer':
+        return steemAuthorLink(txData.from) + ' transferred ' + txData.amount + ' to '+ steemAuthorLink(txData.to) + ' with the memo "' + txData.memo + '"';
+        break;
+      case 'claim_reward_balance':
+        return steemAuthorLink(txData.account) + ' claimed his remaining rewards balance of ' + txData.reward_steem + ", "+  txData.reward_sbd + " and " + txData.reward_vests;
+        console.log(txType, txData) ;
+      break;
+      case 'custom_json':
+          if (txData.id == 'follow') {
+            custom_json = JSON.parse(txData.json);
+            return steemAuthorLink(custom_json[1].follower) + ' followed ' + steemAuthorLink(custom_json[1].following);
+          }
+      default:
+        return txType + ' ' + JSON.stringify(txData).substring(0,10) + ((txData.length > 10) ? "....." : "");
+        break;
+    }
+  }
+  function steemBlogFullurl(author, permlink) {
+      return BASEURL + '@' + author + '/' + permlink;
+  }
+  function steemBlogFullurl(author, permlink) {
+      return BASEURL + '@' + author + '/' + permlink;
+  }
+  function steemAuthorFullurl(author) {
+      return BASEURL + '@' + author;
+  }
+  function steemAuthorLink(author) {
+    return getLink('@' + author, steemAuthorFullurl(author));
+  }
+  function getLink(linkText, targetLink) {
+    if (typeof linkText == "undefined" || linkText == ''){
+      linkText = targetLink;
+    }else if (typeof targetLink === "undefined") {
+      targetLink = linkText;
+    }
+    return `<a href = ${targetLink} target="_blank">${linkText}</a>`;
+  }
+  </script>
+</head>
+
+
+
+<body>
+  <div id="gokul-details">
+     </div>
+  <div id="steem-data-wrapper">
+    <h2>Please wait while fetching the data from Steem Blockchian.</h2>
+  </div>
+</div>
+</body>
+</html>
