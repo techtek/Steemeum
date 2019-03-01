@@ -82,9 +82,32 @@ function tick() {
 		
 		
 		
+	
+
+
+<script src="https://cdn.steemjs.com/lib/latest/steem.min.js"></script>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	  
+	  	<script> 
 		
+		//SBD in the pool script
 		
-		
+	 var user=["steemeum"]
+	var i;
+	
+	steem.api.getAccounts(user, function(err, result) {
+		for(i=0;i<user.length;i++){
+			var data=result[i];
+			eval('var obj='+data["json_metadata"]);
+			var display='<b><i>'+data["sbd_balance"]+' ≈ </i></b>';
+ 			
+ 			$("#user").append(display);
+ 			
+  		}
+	});
+</script>
+
+
 		
 		
     </head>
@@ -164,7 +187,7 @@ function tick() {
               <img class="iphone-mockup ml-auto" src="images/app-promo/android-app-mockup.png" alt="Steemeum virtual mobile mining app for android">
 	   
 			  
-            </div>
+             </div>
 			
           </div>
 		  <center>
@@ -173,7 +196,10 @@ function tick() {
 				<div><span class="hours" id="hours"></span><div class="smalltext">Hours</div></div>
 				<div><span class="minutes" id="minutes"></span><div class="smalltext">Minutes</div></div>
 				<div><span class="seconds" id="seconds"></span><div class="smalltext">Seconds</div></div>
-				<p><font size="3">Until next <b>SBD</b> rewards are send out.</font></p> 
+				<p><font size="3">Time until next <b>SBD</b> rewards are send out. &nbsp &nbsp &nbsp Current rewards in the pool: &nbsp <span id="user"></font></p> 
+				
+				 
+				
 			</div>
 		</center>
 		
@@ -183,7 +209,7 @@ function tick() {
 		
         <!-- / Inner Wrapper -->
 
-						<!-- / time until next payout -->			  
+						<!-- / time until next payout -->				  
 
       </div>
 	        <!-- / Welcome Section -->
@@ -208,7 +234,7 @@ function tick() {
                   <div class="icon text-white bg-success mr-5"><i class="fas fa-mobile-alt"></i></div>
                   <div>
                       <h5>Easy to use mobile app</h5>
-                      <p>The quality and usability of the app is guaranteed by a wide-ranging beta test with more than 50 users.</p>
+                      <p>The quality and usability of the app is guaranteed by a wide-ranging beta test with more than 100 users.</p>
                   </div>
                 </div>
 
@@ -243,6 +269,9 @@ function tick() {
           </div>
 		  <center>
 
+		  
+		  
+		  
  
 </div>
 </center>
@@ -255,7 +284,7 @@ function tick() {
 	        <!-- Subscribe Section -->
       <div class="subscribe section bg-dark py-4">
         <h3 class="section-title text-center text-white m-5">Steem Blockchain </h3>
-        <p class="text-muted col-md-6 text-center mx-auto">To use Steemeum you need to have a Steem account. With your own Steem account you can get rewarded with the Steem cryptocurrency for a wide variety of activities such as blogging, rating and creating content, play games, watching videos and much more. </p>
+        <p class="text-muted col-md-6 text-center mx-auto">To use Steemeum you need to have a Steem account. With your Steem account you can get rewarded with the Steem cryptocurrency for a wide variety of activities such as blogging, rating and creating content, play games, watching videos and much more. </p>
         <form class="form-inline d-table mb-5 mx-auto" action="/">
           <div class="form-group">
 			<a class="btn btn-outline-success btn-pill" href="https://signup.steemit.com" target="_blank">Create Steem Account →</a>
@@ -268,11 +297,9 @@ function tick() {
         </form>
 
 
-        
-
-      
+            
 	  <center>
-	  <iframe src="/Steemeum/matrix.html" width="60%" height="230" scrolling="no" frameBorder="0">	  
+	  <iframe src="/steemeum/matrix.html" width="60%" height="230" scrolling="no" frameBorder="0">	  
 	  </iframe>
 	  </center>
 	  <p class="text-muted col-md-6 text-center mx-auto"> </p>
@@ -280,10 +307,48 @@ function tick() {
 				<p class="text-muted col-md-6 text-center mx-auto"> </p>
 	  
 	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+
+	  
+
+	 
+	 
+
+
+	  
+ 
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
       <!-- / Subscribe Section -->  
 </div>
 
      
+	 
+
+	 
+	 
+	 
+	 
+	 
       <!-- / Our Blog Section -->
 
 
